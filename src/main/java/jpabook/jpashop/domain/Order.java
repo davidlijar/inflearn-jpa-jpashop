@@ -62,4 +62,9 @@ public class Order {
     public void setMember(Member member) {
         this.member = member;
     }
+
+    public void addOrder(OrderItem orderItem) {
+            orderItems.add(orderItem);
+            orderItem.setOrder(this);
+    }
 }
