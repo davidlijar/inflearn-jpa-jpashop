@@ -5,8 +5,11 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import jpabook.jpashop.domain.Book;
+import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderItem;
+
+import java.util.List;
 
 public class JpaMain {
 
@@ -20,27 +23,25 @@ public class JpaMain {
 
             try{
 
-                Book book = new Book();
-                book.setAuthor("Lee");
-                book.setAuthor("120Di");
-                book.setName("Life");
+                List<Member> resultList = em.createQuery("select m From Member m where m.name like '%kim%'",
+                                Member.class)
+                        .getResultList();
 
-                em.persist(book);
+                System.out.println("==================");
+                for (Member member : resultList) {
+                    System.out.println("member = " + member.getName());
+                }
 
                 tx.commit();
             }catch(Exception e){
                 tx.rollback();
+                e.printStackTrace();
             }finally {
                 em.close();
             }
 
             emf.close();
 
-
-
-
-            em.close();
-            emf.close();
         }
 
     }
