@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import jpabook.jpashop.domain.Book;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.domain.Order;
@@ -23,14 +24,7 @@ public class JpaMain {
 
             try{
 
-                List<Member> resultList = em.createQuery("select m From Member m where m.name like '%kim%'",
-                                Member.class)
-                        .getResultList();
 
-                System.out.println("==================");
-                for (Member member : resultList) {
-                    System.out.println("member = " + member.getName());
-                }
 
                 tx.commit();
             }catch(Exception e){
